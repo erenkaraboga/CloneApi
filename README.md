@@ -3,9 +3,9 @@
     #  Asp.Net Core
     #  Entity Framework
     #  MVC
-    #  Azure Blob Services (Because of upload image and audio file)
-    #  Azure Web App Service
-    #  Azure Sql Database Service
+    #  Microsoft Azure Blob Services (Because of upload image and audio file)
+    #  Microsoft Azure Web App Service
+    #  Microsoft Azure Sql Database Service
 # Endpoints
     #  Base URL = https://carrestfulapi.azurewebsites.net
     #  GET    => /api/brands
