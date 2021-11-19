@@ -1,2 +1,20 @@
-# CarApi REST Api's with Asp.Net Core , Entity Framework Core and C#
-![Screenshot_1](https://user-images.githubusercontent.com/74095539/142684450-3f5c8e51-cb56-48b4-b684-2aebd251b927.jpg)
+# CarApi 
+    # *** Features used***
+    #  Asp.Net Core
+    #  Entity Framework
+    #  MVC
+    #  Azure Blob Services (Because of upload image and audio file)
+    #  Azure Web App Service
+    #  Azure Sql Database Service
+# Endpoints
+    #  Base URL = https://carrestfulapi.azurewebsites.net
+    #  GET    => /api/brands
+    #  GET    => /api/brands/{id}
+    #  POST   => /api/brands
+    #  PUT    => /api/brands/{id}
+    #  Delete => /api/brands/{id}
+# Example  
+    # Request:
+    # https://carrestfulapi.azurewebsites.net/api/brands
+    
+    
