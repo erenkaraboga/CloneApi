@@ -13,8 +13,7 @@
     #  POST   => /api/brands
     #  PUT    => /api/brands/{id}
     #  Delete => /api/brands/{id}
-# Example  
-    # Request:
+# Example Request
     # https://carrestfulapi.azurewebsites.net/api/brands
     
     
