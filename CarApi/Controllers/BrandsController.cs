@@ -52,7 +52,7 @@ namespace CarApi.Controllers
                                         madeby = brand.MadeBy,
                                         imageUrl = brand.ImageUrl,
                                         audioUrl = brand.AudioUrl,
-                                    }).ToListAsync();
+                                    }).FirstOrDefaultAsync();
                 return Ok(brands);
             } 
         }
