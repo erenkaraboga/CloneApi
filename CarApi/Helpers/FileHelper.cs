@@ -15,7 +15,9 @@ namespace CarApi.Helpers
             string connectionString = @"DefaultEndpointsProtocol=https;AccountName=carstroage;AccountKey=3OXKHIKtcna3gaXrKKSznDlnJ4y/W/IkBBi6JVrqozg8Sun2u7Yf3B1aHBuXo9UyKiaAfgW9ymxLBPVKn2UKGA==;EndpointSuffix=core.windows.net";
             string containerName = "carscover";
             BlobContainerClient blobContainerClient = new BlobContainerClient(connectionString, containerName);
-            BlobClient blobClient = blobContainerClient.GetBlobClient(file.FileName);
+            var guid = Guid.NewGuid().ToString();
+            
+            BlobClient blobClient = blobContainerClient.GetBlobClient(file.FileName + guid);
             var memoryStream = new MemoryStream();
             
             await file.CopyToAsync(memoryStream);

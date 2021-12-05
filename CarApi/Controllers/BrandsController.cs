@@ -30,7 +30,7 @@ namespace CarApi.Controllers
                                     name = brand.Name,
                                     madeby= brand.MadeBy,
                                     imageUrl = brand.ImageUrl,
-                                    audioUrl= brand.AudioUrl,
+                                    //audioUrl= brand.AudioUrl,
                                 }).ToListAsync();
             return Ok(brands);
         }
@@ -51,7 +51,7 @@ namespace CarApi.Controllers
                                         name = brand.Name,
                                         madeby = brand.MadeBy,
                                         imageUrl = brand.ImageUrl,
-                                        audioUrl = brand.AudioUrl,
+                                        //audioUrl = brand.AudioUrl,
                                     }).FirstOrDefaultAsync();
                 return Ok(brands);
             } 
@@ -59,13 +59,27 @@ namespace CarApi.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromForm] Brand Recivedcar)
         {
-            var imageUrl = await FileHelper.UploadImage(Recivedcar.Image);
-            Recivedcar.ImageUrl = imageUrl;
-            var audioUrl = await FileHelper.UploadAudio(Recivedcar.AudioFile);
-            Recivedcar.AudioUrl = audioUrl;
-            await _dbcontext.Brands.AddAsync(Recivedcar);
-            await _dbcontext.SaveChangesAsync();
-            return StatusCode(StatusCodes.Status201Created);
+            if (Recivedcar.Image==null)
+            {
+
+                Recivedcar.ImageUrl = null;
+                // var audioUrl = await FileHelper.UploadAudio(Recivedcar.AudioFile);
+                //Recivedcar.AudioUrl = audioUrl;
+                await _dbcontext.Brands.AddAsync(Recivedcar);
+                await _dbcontext.SaveChangesAsync();
+                return StatusCode(StatusCodes.Status201Created);
+            }
+            else
+            {
+                var imageUrl = await FileHelper.UploadImage(Recivedcar.Image);
+                Recivedcar.ImageUrl = imageUrl;
+                // var audioUrl = await FileHelper.UploadAudio(Recivedcar.AudioFile);
+                //Recivedcar.AudioUrl = audioUrl;
+                await _dbcontext.Brands.AddAsync(Recivedcar);
+                await _dbcontext.SaveChangesAsync();
+                return StatusCode(StatusCodes.Status201Created);
+            }
+            
         }
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(int id, [FromForm] Brand RecivedCar)
@@ -77,15 +91,31 @@ namespace CarApi.Controllers
             }
             else
             {
-                var imageUrl = await FileHelper.UploadImage(RecivedCar.Image);
-                var audioUrl = await FileHelper.UploadAudio(RecivedCar.AudioFile);
+                if (RecivedCar.Image==null)
+                {
+                    //var imageUrl = await FileHelper.UploadImage(RecivedCar.Image);
+                    //var audioUrl = await FileHelper.UploadAudio(RecivedCar.AudioFile);
+                    car.Name = RecivedCar.Name;
+                    car.ImageUrl = null;
+                    car.MadeBy = RecivedCar.MadeBy;
+                    car.AudioUrl = null;
+                    _dbcontext.SaveChanges();
+                    return Ok("Updated Successfully");
+                }
+                else
+                {
+                    var imageUrl = await FileHelper.UploadImage(RecivedCar.Image);
+                   // var audioUrl = await FileHelper.UploadAudio(RecivedCar.AudioFile);
 
-                car.Name = RecivedCar.Name;
-                car.ImageUrl = imageUrl;
-                car.MadeBy = RecivedCar.MadeBy;
-                car.AudioUrl = audioUrl;
-                _dbcontext.SaveChanges();
-                return Ok("Updated Successfully");
+                    car.Name = RecivedCar.Name;
+                    car.ImageUrl = imageUrl;
+                    car.MadeBy = RecivedCar.MadeBy;
+                    car.AudioUrl = null;
+                    _dbcontext.SaveChanges();
+                    return Ok("Updated Successfully");
+                }
+                
+               
             }
 
         }
