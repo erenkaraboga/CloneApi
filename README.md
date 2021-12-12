@@ -16,5 +16,5 @@
 # Example Request
     # https://carrestfulapi.azurewebsites.net/api/brands
 # Note!!  
-    # Audio will be added soon
+    # Audio file will be added soon.
     
